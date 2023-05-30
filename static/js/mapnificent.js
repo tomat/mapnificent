@@ -536,14 +536,18 @@ Mapnificent.prototype.drawTile = function() {
 
     var stationsAround = self.quadtree.searchInRadius(latlng.lat, latlng.lng, searchRadius);
 
-    ctx.globalCompositeOperation = 'source-over';
-    ctx.fillStyle = 'rgba(50,50,50,0.4)';
-    ctx.fillRect(0, 0, canvas.width, canvas.height);
-
     ctx.globalCompositeOperation = 'destination-out';
     ctx.fillStyle = 'rgba(0,0,0,1)';
 
     for (var i = 0; i < self.positions.length; i += 1) {
+      if (i === 0) {
+        ctx.globalCompositeOperation = 'hue';
+        ctx.fillStyle = 'rgba(0,255,255,1)';
+      } else {
+        ctx.globalCompositeOperation = 'saturation';
+        ctx.fillStyle = 'rgba(255,0,0,1)';
+      }
+
       var drawStations = self.positions[i].getReachableStations(stationsAround, start, tileSize);
       for (var j = 0; j < drawStations.length; j += 1) {
         ctx.beginPath();
@@ -552,6 +556,10 @@ Mapnificent.prototype.drawTile = function() {
         ctx.fill();
       }
     }
+
+    ctx.globalCompositeOperation = 'destination-out';
+    ctx.fillStyle = 'rgba(255,255,255,1)';
+    ctx.fillRect(0, 0, canvas.width, canvas.height);
   };
 };
 

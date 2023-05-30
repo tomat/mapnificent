@@ -18,7 +18,7 @@ var mapnificentWorker = (function(undefined) {
       transferCounter++;
 
       if (transferCounter > maxTransfers) {
-        // break;
+        break;
       }
 
       for (i = 0; i < nsl; i += 1){
@@ -69,6 +69,9 @@ var mapnificentWorker = (function(undefined) {
                            stationMap[stationId] <= seconds){
           for (j = 0; j < travelOptionLength; j += 1){
             rStation = station.TravelOptions[j];
+
+            // console.log(rStation);
+
             rStation.Stop = rStation.Stop || 0;
             if(rStation.Stop != fromStation && rStation.Line === line){
               nextSeconds = seconds + (rStation.TravelTime || 0) + stay;
