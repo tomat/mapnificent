@@ -12,7 +12,15 @@ var mapnificentWorker = (function(undefined) {
       stay, seconds, line, nextSeconds, nextwalkTime, waittime, fromStation,
       testWalkTime, walkTime, closeStations = {}, trace, next;
 
+    var maxTransfers = 5;
+    var transferCounter = 0;
     while (nsl > 0){ // as long as we have next stations to go
+      transferCounter++;
+
+      if (transferCounter > maxTransfers) {
+        // break;
+      }
+
       for (i = 0; i < nsl; i += 1){
         count += 1;
         // Reporting progress to main thread occasionally
@@ -244,6 +252,7 @@ var mapnificentWorker = (function(undefined) {
       var distance = nextStations[k][1];
       var seconds = distance * secondsPerM;
       if (seconds <= maxWalkTime){
+        console.log('startStation', stationId, nextStations[k][0], event);
         startStations.push({
           stationId: stationId,
           line: -1,  // walking to station

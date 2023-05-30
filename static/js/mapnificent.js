@@ -285,14 +285,14 @@ function Mapnificent(map, city, pageConfig){
     intervalKey: '1-6',
     baseurl: '/',
     dataPath: city.dataPath || './',
-    maxWalkTime: 15 * 60,
+    maxWalkTime: 3 * 60,
     secondsPerKm: 13 * 60,
-    initialStationSearchRadius: 1000,
+    initialStationSearchRadius: 500,
     redrawOnTimeDrag: false,
     debug: window.location.search.indexOf("debug") !== -1,
   }, city);
   this.settings.options = $.extend({
-    maxWalkTravelTime: 1.5 * 60 * 60,
+    maxWalkTravelTime: 3 * 60,
   }, this.settings.options)
   this.settings = $.extend(this.settings, pageConfig);
 }
@@ -322,7 +322,7 @@ Mapnificent.prototype.init = function(){
         self.addPosition(e.latlng);
     });
     self.map.on('contextmenu', function(e) {
-      if (self.settings.debug) {
+      if (true) {
         self.logDebugMessage(e.latlng);
       }
     });
